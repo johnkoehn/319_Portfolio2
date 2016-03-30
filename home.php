@@ -19,6 +19,11 @@ if(!isset($_SESSION['user']))
 
 <h2> Welcome <?php echo $_SESSION['user']; ?> </h2>
 <table>
+<tr>
+<td> <image src="images\56fb6643d72e8.png" /> </td>
+
+</tr>
+
 </table>
 
 

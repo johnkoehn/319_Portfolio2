@@ -57,7 +57,7 @@ $(document).ready(function()
 	{
 		if(title.val() != "")
 		{
-			var dataURL = canvas.toDataURL();
+			var dataURL = canvas.get(0).toDataURL();
 			$.post("save.php", {dataURL : dataURL, title : title.val()}, function(data)
 				{
 					if(data == "success")
@@ -66,7 +66,7 @@ $(document).ready(function()
 					}
 					else
 					{
-						info.html("Save failed!");
+						info.html(data);
 					}
 				});
 		}
