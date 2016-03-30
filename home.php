@@ -31,7 +31,7 @@ $(document).ready(function()
 {
 	var logout = $("#logout");
 	var t1 = $("#myDiv");
-	var username = $("#username");
+	var newdrawing = $("#newdrawing");
 	var password = $("#password");
 	var confPassword = $("#password_confirm");
 	
@@ -40,6 +40,12 @@ $(document).ready(function()
 		$.get("logout.php");
 		window.location.href = "login.php";
 	});
+	
+	newdrawing.click (function()
+	{
+		window.location.href = "draw.php";
+	});
+	
 });
 
 </script>
