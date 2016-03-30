@@ -41,7 +41,7 @@ if($check == "successful")
 		} 
 		else 
 		{
-			echo "Error: " . $sql . "<br>" . $conn->error;
+			$check = "username_not_unquie";
 		}
 	}
 	$conn->close();
