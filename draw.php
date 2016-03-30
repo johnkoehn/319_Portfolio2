@@ -60,14 +60,7 @@ $(document).ready(function()
 			var dataURL = canvas.get(0).toDataURL();
 			$.post("save.php", {dataURL : dataURL, title : title.val()}, function(data)
 				{
-					if(data == "success")
-					{
-						info.html("Painting saved!");
-					}
-					else
-					{
-						info.html(data);
-					}
+					info.html(data);
 				});
 		}
 		else

@@ -30,5 +30,14 @@ $('#drawCanvas').mousemove(function(e)
 	}
 });
 
+/*
+var img1 = new Image();
+img1.src = "images/56fb6643d72e8.png";
+
+img1.onload = function()
+{
+	ctx.drawImage(img1, 0, 0);
+};*/
+
 });
 
