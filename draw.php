@@ -12,6 +12,11 @@ if(!isset($_SESSION['user']))
 	header("Location:login.php");
 }
 
+$new = false;
+if(array_key_exists('title', $_GET))
+{
+	$new = true;
+}
 
 ?>
 
@@ -21,7 +26,7 @@ if(!isset($_SESSION['user']))
 
 <body>
 	<form>
-	Title:<input type="text" id="title" name="title" style="margin-left:55px"> </input><br /> <br />
+	Title:<input type="text" id="title" name="title" style="margin-left:55px" value="<?php if($new) { echo $_GET['title']; }?>">  </input><br /> <br />
 	</form>
 	<canvas id = "drawCanvas" width = "900" height = "600" style = "border:1px solid #d3d3d3;"></canvas> <br />
 	
@@ -40,6 +45,7 @@ $(document).ready(function()
 	var save = $("#save");
 	var title = $("#title");
 	var canvas = $("#drawCanvas");
+	var ctx = $('#drawCanvas')[0].getContext('2d');
 	var info = $("#info");
 	
 	logout.click (function()
@@ -69,6 +75,25 @@ $(document).ready(function()
 		}
 		
 	});
+	
+    var result = "<?php echo $_GET['title']; ?>";
+	if(result != '')
+	{
+		$.get("loadImage.php", {title : result}, function(data)
+			{
+				if(data != "")
+				{
+					console.log("hi");
+					var img1 = new Image();
+					img1.src = "images/" + data + ".png?dummy=<?php echo rand(); ?>";
+
+					img1.onload = function()
+					{
+						ctx.drawImage(img1, 0, 0);
+					};
+				}
+			});
+	}
 	
 });
 

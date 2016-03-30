@@ -50,7 +50,7 @@ if($result->num_rows > 0)
 	{
 		if($_SESSION['user'] == $row["user"])
 		{
-			echo "<td > <image src=\"images\\" . $row["id"] . "_small.png\" style=\"margin-right:50px\" border=\"5\"/> <p style=\"margin-right:50px\" align=\"center\">" . $row["title"] . "</p> </td>";
+			echo "<td > <image src=\"images\\" . $row["id"] . "_small.png?" . rand() . "\" style=\"margin-right:50px\" border=\"5\" class=\"image\" name=\"" . $row["title"] ."\" /> <p style=\"margin-right:50px\" align=\"center\">" . $row["title"] . "</p> </td>";
 			$pointer += 1;
 			if($pointer == 3)
 			{
@@ -90,6 +90,12 @@ $(document).ready(function()
 	newdrawing.click (function()
 	{
 		window.location.href = "draw.php";
+	});
+	
+	$('.image').click(function()
+	{
+		var title = $(this).attr('name');
+		window.location.href = "draw.php?title=" + title; 
 	});
 	
 });
