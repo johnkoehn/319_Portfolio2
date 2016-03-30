@@ -1,4 +1,5 @@
 <?php
+require 'smart_resize_image.function.php';
 	//php functions
 	function checkIfImageExist($conn)
 	{
@@ -6,12 +7,12 @@
 		$sql = "SELECT id, title, user FROM images";
 		$result = $conn->query($sql);
 		
-		//go through the usernames and passwords to check for valid login
+		//go through the usernames and passwords to check for same image title and user
 		if($result->num_rows > 0)
 		{
 			while($row = $result->fetch_assoc())
 			{
-				if($_POST['title'] == $row["title"] && $_SESSION['user'] == $_SESSION["user"])
+				if($_POST['title'] == $row["title"] && $_SESSION['user'] == $row["user"])
 				{
 					return $row['id'];
 				}
@@ -32,6 +33,10 @@
 		$success = file_put_contents($file, $data);
 		echo $success ? "file saved!" : 'Unable to save the file.';
 	
+		//save resized image
+		$resizedFile = UPLOAD_DIR . $id . '_small.png';
+		smart_resize_image(null , file_get_contents($file), 300 , 200 , false , $resizedFile , false , false ,100 );
+		
 		//add to database
 		$sql = "INSERT INTO images (id, title, user) VALUES ('{$id}',
 		'{$_POST['title']}', '{$_SESSION['user']}')";
@@ -54,6 +59,10 @@
 		$file = UPLOAD_DIR . $id . '.png';
 		$success = file_put_contents($file, $data);
 		echo $success ? "file saved!" : 'Unable to save the file.';
+		
+				//save resized image
+		$resizedFile = UPLOAD_DIR . $id . '_small.png';
+		smart_resize_image(null , file_get_contents($file), 300 , 200 , false , $resizedFile , false , false ,100 );
 	}
 
 

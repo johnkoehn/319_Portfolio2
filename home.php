@@ -18,9 +18,50 @@ if(!isset($_SESSION['user']))
 <body>
 
 <h2> Welcome <?php echo $_SESSION['user']; ?> </h2>
+<h3> Click on an old drawing to edit! </h3>
 <table>
-<tr>
-<td> <image src="images\56fb6643d72e8.png" /> </td>
+<?php
+
+//database information
+$username = "root";
+$password = "root";
+$dbServer = "localhost";
+$dbName   = "portfolio2";
+
+$conn = new mysqli($dbServer, $username, $password, $dbName);
+
+// Check connection
+if ($conn->connect_error) 
+{
+	echo "database failure!!";
+	die;
+}
+$columns = 3; //images per row
+$pointer = 0; //what column we are currently at
+
+//pull the image information from the sql database, for each image, display a small version of it in the table
+$sql = "SELECT id, title, user FROM images";
+$result = $conn->query($sql);
+echo "<tr>";
+
+if($result->num_rows > 0)
+{
+	while($row = $result->fetch_assoc())
+	{
+		if($_SESSION['user'] == $row["user"])
+		{
+			echo "<td > <image src=\"images\\" . $row["id"] . "_small.png\" style=\"margin-right:50px\" border=\"5\"/> <p style=\"margin-right:50px\" align=\"center\">" . $row["title"] . "</p> </td>";
+			$pointer += 1;
+			if($pointer == 3)
+			{
+				echo "</tr><tr>";
+				$pointer = 0;
+			}
+		}
+	}
+}
+
+?>
 
 </tr>
 
