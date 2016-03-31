@@ -76,7 +76,9 @@ $(document).ready(function()
 		
 	});
 	
-    var result = "<?php echo $_GET['title']; ?>";
+    var result = "<?php if(isset($_GET['title']))
+    {echo $_GET['title']; 
+    }?>";
 	if(result != '')
 	{
 		$.get("loadImage.php", {title : result}, function(data)
