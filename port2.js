@@ -126,6 +126,13 @@ $('#eraserButton').click(function (e)
 	ctx.strokeStyle = "White";
 });
 
+$('#clear').click(function(e)
+{
+	var canvas = $('#drawCanvas')[0];
+	
+	ctx.clearRect(0,0,canvas.width,canvas.height);
+});
+
 });
 
 
