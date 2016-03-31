@@ -83,7 +83,6 @@ $('#setCust').click(function(e)
 	var red = parseInt($('#custRed').val());
 	var blue = parseInt($('#custBlue').val());
 	var green = parseInt($('#custGreen').val());
-	var t1 = Number.isInteger(red);
 	if(Number.isInteger(red) && Number.isInteger(blue) && Number.isInteger(green))
 	{
 		if(red > 255)
@@ -120,6 +119,11 @@ $('#setCust').click(function(e)
 	{
 		console.log("Did not receive Integer value for one of custom color text fields.");
 	}
+});
+
+$('#eraserButton').click(function (e)
+{
+	ctx.strokeStyle = "White";
 });
 
 });
