@@ -31,6 +31,7 @@ $('#drawCanvas').mousemove(function(e)
 	}
 });
 
+<<<<<<< HEAD
 $('#drawCanvas').mouseleave(function(e)
 {
 	drawing = false;
